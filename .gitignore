@@ -6,3 +6,4 @@ Frontend/.env
 
 dist
 build
+.vscode/
