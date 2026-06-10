@@ -1,0 +1,89 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+/* =========================
+   MODERN PREMIUM SCROLLBAR
+   Glass + Gradient + Smooth UX
+========================= */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+/* Firefox support */
+.custom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #6366f1 rgba(255, 255, 255, 0.05);
+}
+
+/* Chrome / Edge / Safari */
+.custom-scroll::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+.custom-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Thumb */
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    #6366f1,
+    #a855f7,
+    #3b82f6
+  );
+  border-radius: 999px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    #3b82f6,
+    #8b5cf6,
+    #6366f1
+  );
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.6);
+  transform: scale(1.05);
+}
+
+/* Active (click hold) */
+.custom-scroll::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(
+    180deg,
+    #2563eb,
+    #7c3aed
+  );
+}
+
+/* Corner (scroll both axis) */
+.custom-scroll::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+
+@keyframes slideDown {
+
+  from {
+    opacity: 0;
+    transform:
+      translateY(-60px);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0);
+  }
+
+}
+html {
+  scroll-behavior: smooth;
+}

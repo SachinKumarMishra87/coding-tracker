@@ -1,0 +1,97 @@
+# 🚀 Coding Tracker Backend Progress
+
+## 🔐 Authentication & Security
+
+✅ User Registration
+✅ User Login
+✅ JWT Authentication
+✅ Auth Middleware
+✅ Admin Middleware
+✅ Protected Routes
+✅ Role Based Access (Admin/User)
+
+---
+
+# 📚 Topic Module
+
+## Features
+
+✅ Add Topic
+✅ Get All Topics
+✅ Auto Update `patternCount`
+
+# 🧩 Pattern Module
+
+## Features
+
+✅ Add Pattern
+✅ Get Patterns By Topic
+✅ Delete Pattern
+✅ Duplicate Pattern Validation
+✅ Case-Insensitive Duplicate Check
+✅ Auto Update `questionCount`
+
+# ❓ Question Module
+
+## Features
+
+✅ Add Question
+✅ Get Questions By Pattern
+✅ Update Question
+✅ Delete Question
+✅ Toggle Solved Status
+✅ Search Questions
+✅ Duplicate Question Validation
+✅ `isSolved` Checkbox Support
+
+# 📊 Auto Count System
+
+✅ `patternCount` Auto Increase/Decrease
+✅ `questionCount` Auto Increase/Decrease
+
+---
+
+# 🛡️ Validation & Protection
+
+✅ Duplicate Prevention
+✅ Case-Insensitive Validation
+✅ Admin-Only APIs
+✅ Protected APIs
+
+---
+
+# 🏗️ Project Structure
+
+Topic
+   ↓
+Pattern
+   ↓
+Question
+
+---
+
+# 🎯 Next Step → Frontend Development
+
+## Pages
+
+* Login
+* Register
+* Topics Page
+* Patterns Page
+* Questions Page
+* Admin Panel
+
+## Frontend Features
+
+* Token Storage
+* Protected Routes
+* API Integration
+* Search UI
+* Solved Checkbox UI
+
+
+abhi hmne change kiya questionmodel me
+ab model me hmne pregress schema banaya
+
+iske bad hmne sab fix kr liya coockies me token save and togge bar me issue thsa koi bhi user toggle pe click krta to sabke liye select ho jata tha usi ke liye get progress ye sab new bananaya
+aaj abhi tak topic section ek trike se complete hai 
