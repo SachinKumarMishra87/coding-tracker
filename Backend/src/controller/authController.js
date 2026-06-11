@@ -152,7 +152,7 @@ export const verifyOtpAndRegister = async (req, res) => {
       .cookie("token", token, {
         httpOnly: true,
         secure: true,
-        sameSite: "strict",
+        sameSite: "none",
         maxAge: 7 * 24 * 60 * 60 * 1000
       })
       .json({
@@ -203,8 +203,8 @@ export const login = async (req, res) => {
     // 🔐 COOKIE ONLY (NO TOKEN IN RESPONSE)
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false, // production: true (HTTPS)
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -407,9 +407,9 @@ export const logout = async (req, res) => {
   try {
     res.clearCookie("token", {
       httpOnly: true,
-      secure: false, // production me true (HTTPS)
-      sameSite: "lax", // production me "none"
-      path: "/", // important
+      secure: true,
+      sameSite: "none",
+      path: "/",
     });
 
     return res.status(200).json({
