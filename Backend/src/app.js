@@ -22,8 +22,7 @@ import deleteClosedTickets from './utils/deleteClosedTickets.js';
 const app = express();
 
 app.use(cors({
-    origin: "http://localhost:5173",  // 👈 exact frontend URL
-    // origin: true,  // 👈 for Mobile frontend URL
+    origin: process.env.CLIENT_URL,
     credentials: true
 }));
 
