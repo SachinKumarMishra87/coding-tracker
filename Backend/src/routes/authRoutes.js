@@ -58,8 +58,7 @@ router.get(
 
             session: false,
 
-            failureRedirect:
-                "http://localhost:5173/login"
+            failureRedirect: `${process.env.CLIENT_URL}/login`
 
         }
 
@@ -91,34 +90,19 @@ router.get(
 
         // COOKIE
 
-        res.cookie(
-
-            "token",
-
-            token,
-
-            {
-
-                httpOnly: true,
-
-                secure: false,
-
-                sameSite: "lax"
-
-            }
-
-        );
-
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+        });
         // REDIRECT
 
-        return res.redirect(
-            "http://localhost:5173/profile"
-        );
+        return res.redirect(`${process.env.CLIENT_URL}/profile`);
 
     }
 
 );
 
 // pulic profile route
-router.get("/public/:username",getPublicProfile);
+router.get("/public/:username", getPublicProfile);
 export default router;
