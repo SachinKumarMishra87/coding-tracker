@@ -258,7 +258,7 @@ const Signup = () => {
         </div>
 
         <a
-          href="http://localhost:5000/api/auth/google"
+         href={`${import.meta.env.VITE_API_URL}/auth/google`}
           className="
     w-full
     flex items-center justify-center gap-3
