@@ -4,11 +4,13 @@ import API from './services/api';
 import { useNavigate } from 'react-router-dom';
 import { Toaster } from "react-hot-toast";
 import ScrollToTop from './component/ScrollToTop';
+import Splash from './component/Splash';
 
 const App = () => {
 
   const [dueCount, setDueCount] = useState(0);
   const [showRevisionBanner, setShowRevisionBanner] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -57,11 +59,28 @@ const App = () => {
 
   }, [dueCount]);
 
+
+  // Splash
+  useEffect(() => {
+    // 1. Pehle animation ko poora run hone dein (2.8s tak letters aur loading line complete honge)
+    // 2. 3.2 seconds par splash element screen par fade-out (opacity: 0) hona shuru karega
+    // 3. 3.6 seconds par React state se splash ko completely unmount (remove) kar denge
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000); // 2500ms ko badal kar 3600ms kiya taaki transitions smooth rahein
+
+    return () => clearTimeout(timer);
+  }, []);
+
   // =========================
   // FINAL UI STATE
   // =========================
   const shouldShowBanner =
     dueCount > 0 && showRevisionBanner;
+
+  if (loading) {
+    return <Splash />;
+  }
 
   return (
     <>
@@ -141,7 +160,7 @@ const App = () => {
         </div>
       )}
       <Toaster position="top-right" />
-       <ScrollToTop />
+      <ScrollToTop />
       <Approutes />
     </>
   );
