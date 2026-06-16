@@ -709,7 +709,7 @@ const Question = () => {
           <span className="transform group-hover:-translate-x-1 transition-transform">←</span> Back to Patterns
         </button>
 
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center relative sm:justify-between gap-4">
           <div>
             <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-white via-gray-200 to-gray-500 bg-clip-text text-transparent">
               Practice Questions
@@ -720,24 +720,27 @@ const Question = () => {
           {user?.role === "admin" && (
             <button
               onClick={() => {
-                setShowForm(!showForm);
-                if (showForm) {
-                  setEditQuestionId(null);
-                  setQuestionData({
-                    title: "",
-                    difficulty: "easy",
-                    platform: "",
-                    link: "",
-                    youtubeLink: ""
-                  });
+                if (!showForm) {
+                  setShowForm(true);
+
+                  setTimeout(() => {
+                    document
+                      .getElementById("question-form")
+                      ?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      });
+                  }, 100);
+                } else {
+                  setShowForm(false);
                 }
               }}
-              className={`px-5 py-2.5 rounded-xl text-sm font-semibold tracking-wide shadow-lg transition-all active:scale-95 ${showForm
+              className={`px-5 py-2.5 right-6 z-10 fixed rounded-xl text-sm font-semibold tracking-wide shadow-lg transition-all active:scale-95 ${showForm
                 ? "bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-700"
                 : "bg-blue-600 hover:bg-blue-500 text-white shadow-blue-600/10"
                 }`}
             >
-              {showForm ? "Close Form" : "＋ Add New Question"}
+              {showForm ? "× Close Form" : "＋ Add New Question"}
             </button>
           )}
         </div>
@@ -759,7 +762,7 @@ const Question = () => {
 
       <div className="max-w-7xl mx-auto">
         {/* SEARCH BAR */}
-        <div className="mb-6 relative max-w-md">
+        <div id="question-form" className="mb-6 relative max-w-md">
           <input
             type="text"
             placeholder="Search questions by title..."
@@ -891,11 +894,11 @@ const Question = () => {
                         {/* LEFT DETAILS CONTAINER */}
                         <div className="flex items-start gap-3.5 flex-1 min-w-0">
                           <div className="flex items-center h-6">
-                           <input
-  type="checkbox"
-  checked={solved}
-  onChange={() => toggleSolved(q._id)}
-  className="
+                            <input
+                              type="checkbox"
+                              checked={solved}
+                              onChange={() => toggleSolved(q._id)}
+                              className="
     w-4.5 h-4.5
     cursor-pointer
     rounded
@@ -906,7 +909,7 @@ const Question = () => {
     hover:scale-110
     active:scale-95
   "
-/>
+                            />
                           </div>
 
                           <div className="flex-1 min-w-0">
