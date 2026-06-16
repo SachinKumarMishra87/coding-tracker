@@ -10,7 +10,9 @@ const App = () => {
 
   const [dueCount, setDueCount] = useState(0);
   const [showRevisionBanner, setShowRevisionBanner] = useState(true);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => {
+    return !sessionStorage.getItem("splashShown");
+  });
 
   const navigate = useNavigate();
 
@@ -62,15 +64,16 @@ const App = () => {
 
   // Splash
   useEffect(() => {
-    // 1. Pehle animation ko poora run hone dein (2.8s tak letters aur loading line complete honge)
-    // 2. 3.2 seconds par splash element screen par fade-out (opacity: 0) hona shuru karega
-    // 3. 3.6 seconds par React state se splash ko completely unmount (remove) kar denge
+    if (!loading) return;
+
     const timer = setTimeout(() => {
+      sessionStorage.setItem("splashShown", "true");
       setLoading(false);
-    }, 3000); // 2500ms ko badal kar 3600ms kiya taaki transitions smooth rahein
+    }, 2500);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [loading]);
+
 
   // =========================
   // FINAL UI STATE
