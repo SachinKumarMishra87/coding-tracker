@@ -437,7 +437,6 @@ const Home = () => {
                     rounded-2xl
 
                     bg-cyan-500/20
-
                     flex items-center justify-center
 
                     text-2xl
