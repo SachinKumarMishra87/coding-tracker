@@ -21,6 +21,9 @@ import deleteClosedTickets from './utils/deleteClosedTickets.js';
 
 const app = express();
 
+// 🔥 FIX 1: Express ko proxy par trust karne ke liye bolega (Render deployment ke liye mandatory hai)
+app.set("trust proxy", 1);
+
 app.use(cors({
     origin: process.env.CLIENT_URL,
     credentials: true
@@ -29,18 +32,18 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
+// Is part ko thoda modify karein
 app.use(
-
     session({
-
         secret: "googleauthsecret",
-
         resave: false,
-
-        saveUninitialized: false
-
+        saveUninitialized: false,
+        cookie: {
+            secure: true,       // Render (HTTPS) ke liye mandatory hai
+            sameSite: "none",   // Vercel se Render pe cookie bhejne ke liye mandatory hai
+            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 din
+        }
     })
-
 );
 
 app.use(passport.initialize());
