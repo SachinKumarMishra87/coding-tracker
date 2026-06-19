@@ -1,7 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
-// import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
@@ -17,54 +16,51 @@ import supportRoutes from "./routes/supportRoutes.js";
 import session from "express-session";
 import passport from "./config/passport.js";
 import deleteClosedTickets from './utils/deleteClosedTickets.js';
-// dotenv.config();
 
 const app = express();
 
-// 🔥 FIX 1: Express ko proxy par trust karne ke liye bolega (Render deployment ke liye mandatory hai)
+// Render cloud proxy backend ke liye mandatory hai
 app.set("trust proxy", 1);
 
 app.use(cors({
-    origin: process.env.CLIENT_URL,
+    origin: process.env.CLIENT_URL, // Render config me yeh 'https://leetpattracker.in' hoga
     credentials: true
 }));
 
 app.use(express.json());
 app.use(cookieParser());
 
-// Is part ko thoda modify karein
+// 🔥 COOKIE FIX: Passport/Google sessions ke liye first-party cross subdomain attribute setup
 app.use(
     session({
         secret: "googleauthsecret",
         resave: false,
         saveUninitialized: false,
         cookie: {
-            secure: true,       // Render (HTTPS) ke liye mandatory hai
-            sameSite: "none",   // Vercel se Render pe cookie bhejne ke liye mandatory hai
+            secure: true,                  // HTTPS par hi chalega
+            sameSite: "lax",               // Custom domain ki wajah se ab Lax secure aur responsive rahega
+            domain: ".leetpattracker.in",  // 🎯 CRITICAL: Dot ke sath, taaki api aur main frontend dono access kar sakein
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 din
         }
     })
 );
 
 app.use(passport.initialize());
-
 app.use(passport.session());
 
 connectDB();
 
 deleteClosedTickets();
 setInterval(() => {
-
     deleteClosedTickets();
-
 }, 60 * 60 * 1000);
 
 app.get('/', (req, res) => {
     res.send('API is running...');
 });
 
-app.use('/api/auth', authRoutes)
-app.use('/api/topics', topicRoutes)
+app.use('/api/auth', authRoutes);
+app.use('/api/topics', topicRoutes);
 app.use("/api/patterns", patternRoutes);
 app.use("/api/questions", questionRoutes);
 app.use("/api/dashboard", dashboardRoutes);

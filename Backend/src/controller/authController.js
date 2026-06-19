@@ -152,7 +152,8 @@ export const verifyOtpAndRegister = async (req, res) => {
       .cookie("token", token, {
         httpOnly: true,
         secure: true,
-        sameSite: "none",
+        sameSite: "lax",              // <-- Isko 'lax' kiya
+        domain: ".leetpattracker.in",  // <-- Yeh naye line add ki (dot lagana mat bhoolna)
         maxAge: 7 * 24 * 60 * 60 * 1000
       })
       .json({
@@ -204,7 +205,8 @@ export const login = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: true,
-      sameSite: "none",
+      sameSite: "lax",              // <-- Isko 'lax' kiya
+      domain: ".leetpattracker.in",  // <-- Yeh naye line add ki
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -408,7 +410,8 @@ export const logout = async (req, res) => {
     res.clearCookie("token", {
       httpOnly: true,
       secure: true,
-      sameSite: "none",
+      sameSite: "lax",              // <-- Isko 'lax' kiya
+      domain: ".leetpattracker.in",  // <-- Yeh naye line add ki
       path: "/",
     });
 
