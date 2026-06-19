@@ -22,8 +22,21 @@ const app = express();
 // Render cloud proxy backend ke liye mandatory hai
 app.set("trust proxy", 1);
 
+// 🎯 Dynamic CORS configured for both apex and www domains
+const allowedOrigins = [
+    process.env.CLIENT_URL, // https://leetpattracker.in
+    process.env.CLIENT_URL?.replace("https://", "https://www.") // Automatically adds https://www.leetpattracker.in
+];
+
 app.use(cors({
-    origin: process.env.CLIENT_URL, // Render config me yeh 'https://leetpattracker.in' hoga
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl) or if it's in the allowed list
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 }));
 
