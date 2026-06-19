@@ -52,6 +52,7 @@ app.use(
         cookie: {
             secure: true,                  // HTTPS par hi chalega
             sameSite: "lax",               // Custom domain ki wajah se ab Lax secure aur responsive rahega
+            // sameSite: "none",             // only for localhost
             domain: ".leetpattracker.in",  // 🎯 CRITICAL: Dot ke sath, taaki api aur main frontend dono access kar sakein
             maxAge: 7 * 24 * 60 * 60 * 1000 // 7 din
         }

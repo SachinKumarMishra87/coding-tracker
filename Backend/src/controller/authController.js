@@ -206,6 +206,7 @@ export const login = async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "lax",              // <-- Isko 'lax' kiya
+      // sameSite: "none",              // only for localhost
       domain: ".leetpattracker.in",  // <-- Yeh naye line add ki
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });

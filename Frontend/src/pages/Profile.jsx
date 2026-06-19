@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
 
+  const navigate = useNavigate()
   const [user, setUser] = useState(null);
 
   const [showEditModal, setShowEditModal] = useState(false);
@@ -227,11 +229,11 @@ const Profile = () => {
 
   if (authLoading) {
     return (
-       <div className="min-h-[80vh] flex items-center justify-center  text-white">
+      <div className="min-h-[80vh] flex items-center justify-center  text-white">
 
         <div className="text-center flex flex-col items-center gap-4">
 
-           <div className="flex justify-center items-center">
+          <div className="flex justify-center items-center">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
           </div>
 
@@ -493,17 +495,11 @@ const Profile = () => {
                 <button
 
                   onClick={() => {
-
-                    window.open(
-
-                      `/u/${user.username}`,
-
-                      "_blank"
-
-                    );
-
+                    // Ye isi tab mein le jayega aur data saath le jayega
+                    navigate(`/u/${user.username}`, {
+                      state: { leetcodeStats }
+                    });
                   }}
-
                   className="
       px-5 py-2.5
 
