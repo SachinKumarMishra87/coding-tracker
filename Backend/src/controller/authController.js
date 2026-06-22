@@ -1,8 +1,7 @@
 import User from "../model/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import transporter from "../config/mail.js";
-
+import { sendEmail } from "../config/emailHelper.js";
 
 export const sendOtp = async (req, res) => {
   try {
@@ -31,8 +30,7 @@ export const sendOtp = async (req, res) => {
       { upsert: true }
     );
 
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+    await sendEmail({
       to: email,
       subject: "LeetPatTracker - OTP Verification 🔐",
       html: `
@@ -252,8 +250,7 @@ export const forgotPassword = async (req, res) => {
     await user.save();
 
     // send email
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+    await sendEmail({
       to: email,
       subject: "LeetPatTracker - Password Reset OTP 🔐",
       html: `
@@ -323,7 +320,7 @@ export const forgotPassword = async (req, res) => {
     });
 
   } catch (error) {
-     console.error("Forgot Password Error:", error);
+    console.error("Forgot Password Error:", error);
     return res.status(500).json({
       success: false,
       message: error.message,
