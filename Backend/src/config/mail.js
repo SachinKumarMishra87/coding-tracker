@@ -1,5 +1,16 @@
 import nodemailer from "nodemailer";
 
+console.log("EMAIL_USER:", process.env.EMAIL_USER);
+console.log("EMAIL_PASS available:", !!process.env.EMAIL_PASS);
+
+transporter.verify(function (error, success) {
+  if (error) {
+    console.log("SMTP Error:", error);
+  } else {
+    console.log("SMTP Server is ready");
+  }
+});
+
 const transporter = nodemailer.createTransport({
 
     service: "gmail",
