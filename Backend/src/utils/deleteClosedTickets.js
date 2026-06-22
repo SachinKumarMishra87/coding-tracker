@@ -3,7 +3,7 @@ import support from "../model/support.js";
 const deleteClosedTickets = async () => {
 
     const before24Hours = new Date(
-        Date.now() - 24 * 60 * 60 * 1000
+        Date.now() - 72 * 60 * 60 * 1000
     );
 
     await support.deleteMany({
