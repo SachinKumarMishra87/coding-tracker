@@ -145,6 +145,61 @@ export const verifyOtpAndRegister = async (req, res) => {
       { expiresIn: "7d" }
     );
 
+    await sendEmail({
+      to: email,
+      subject: "Welcome to LeetPatTracker 🎉",
+      html: `
+  <div style="font-family: Arial, sans-serif; padding:30px; color:#ffffff;">
+
+    <div style="max-width:500px;margin:auto;background:#111827;padding:25px;border-radius:12px;border:1px solid #374151;">
+
+      <h2 style="text-align:center;color:#22c55e;margin-bottom:10px;">
+        🎉 Welcome Aboard!
+      </h2>
+
+      <p style="text-align:center;color:#9ca3af;font-size:14px;">
+        Your account has been created successfully
+      </p>
+
+      <hr style="border:0;border-top:1px solid #374151;margin:20px 0;" />
+
+      <p style="font-size:14px;color:#d1d5db;">
+        Hello Coder 👋,
+      </p>
+
+      <p style="font-size:14px;color:#d1d5db;">
+        Welcome to LeetPatTracker 🚀 Your coding journey just got smarter. Start tracking your LeetCode progress and improve daily.
+      </p>
+
+      <div style="text-align:center;margin:25px 0;">
+        <div style="
+          display:inline-block;
+          background:#22c55e;
+          color:#0f172a;
+          font-size:16px;
+          font-weight:bold;
+          padding:12px 20px;
+          border-radius:10px;
+        ">
+          Happy Coding 💻
+        </div>
+      </div>
+
+      <hr style="border:0;border-top:1px solid #374151;margin:20px 0;" />
+
+      <p style="font-size:12px;color:#9ca3af;text-align:center;">
+        Keep practicing daily 🔥 | Stay consistent
+      </p>
+
+      <p style="font-size:12px;color:#6b7280;text-align:center;">
+        — Team LeetPatTracker
+      </p>
+
+    </div>
+  </div>
+  `
+    });
+
     // 🔥 SET COOKIE
     return res
       .cookie("token", token, {
@@ -198,6 +253,65 @@ export const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
+
+    await sendEmail({
+      to: email,
+      subject: "New Login Detected 🔐 - LeetPatTracker",
+      html: `
+  <div style="font-family: Arial, sans-serif; padding:30px; color:#ffffff;">
+
+    <div style="max-width:500px;margin:auto;background:#111827;padding:25px;border-radius:12px;border:1px solid #374151;">
+
+      <h2 style="text-align:center;color:#f59e0b;margin-bottom:10px;">
+        🔐 Login Alert
+      </h2>
+
+      <p style="text-align:center;color:#9ca3af;font-size:14px;">
+        We detected a new login to your account
+      </p>
+
+      <hr style="border:0;border-top:1px solid #374151;margin:20px 0;" />
+
+      <p style="font-size:14px;color:#d1d5db;">
+        Hello Coder 👋,
+      </p>
+
+      <p style="font-size:14px;color:#d1d5db;">
+        Your LeetPatTracker account was just accessed. If this was you, no action is required.
+      </p>
+
+      <div style="text-align:center;margin:25px 0;">
+        <div style="
+          display:inline-block;
+          background:#f59e0b;
+          color:#0f172a;
+          font-size:14px;
+          font-weight:bold;
+          padding:12px 20px;
+          border-radius:10px;
+        ">
+          Login Successful ✅
+        </div>
+      </div>
+
+      <p style="text-align:center;color:#f87171;font-size:13px;">
+        ⚠️ If this wasn’t you, please reset your password immediately.
+      </p>
+
+      <hr style="border:0;border-top:1px solid #374151;margin:20px 0;" />
+
+      <p style="font-size:12px;color:#9ca3af;text-align:center;">
+        Stay safe 🔒 | Never share your credentials
+      </p>
+
+      <p style="font-size:12px;color:#6b7280;text-align:center;">
+        — Team LeetPatTracker
+      </p>
+
+    </div>
+  </div>
+  `
+    });
 
     // 🔐 COOKIE ONLY (NO TOKEN IN RESPONSE)
     res.cookie("token", token, {
@@ -390,6 +504,65 @@ export const resetPassword = async (req, res) => {
     user.otpExpire = undefined;
 
     await user.save();
+
+    await sendEmail({
+      to: email,
+      subject: "Password Reset Successful ✅ - LeetPatTracker",
+      html: `
+  <div style="font-family: Arial, sans-serif; padding:30px; color:#ffffff;">
+
+    <div style="max-width:500px;margin:auto;background:#111827;padding:25px;border-radius:12px;border:1px solid #374151;">
+
+      <h2 style="text-align:center;color:#22c55e;margin-bottom:10px;">
+        🔐 Password Updated
+      </h2>
+
+      <p style="text-align:center;color:#9ca3af;font-size:14px;">
+        Your password has been changed successfully
+      </p>
+
+      <hr style="border:0;border-top:1px solid #374151;margin:20px 0;" />
+
+      <p style="font-size:14px;color:#d1d5db;">
+        Hello Coder 👋,
+      </p>
+
+      <p style="font-size:14px;color:#d1d5db;">
+        This is a confirmation that your LeetPatTracker account password was recently updated.
+      </p>
+
+      <div style="text-align:center;margin:25px 0;">
+        <div style="
+          display:inline-block;
+          background:#22c55e;
+          color:#0f172a;
+          font-size:14px;
+          font-weight:bold;
+          padding:12px 20px;
+          border-radius:10px;
+        ">
+          Password Changed Successfully ✔️
+        </div>
+      </div>
+
+      <p style="text-align:center;color:#f87171;font-size:13px;">
+        ⚠️ If you did NOT perform this action, reset your password immediately.
+      </p>
+
+      <hr style="border:0;border-top:1px solid #374151;margin:20px 0;" />
+
+      <p style="font-size:12px;color:#9ca3af;text-align:center;">
+        Keep your account secure 🔒 | Do not share your password
+      </p>
+
+      <p style="font-size:12px;color:#6b7280;text-align:center;">
+        — Team LeetPatTracker
+      </p>
+
+    </div>
+  </div>
+  `
+    });
 
     return res.json({
       success: true,
