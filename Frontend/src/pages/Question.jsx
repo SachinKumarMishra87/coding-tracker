@@ -1003,8 +1003,17 @@ const Question = () => {
                                     difficulty: q.difficulty,
                                     platform: q.platform,
                                     link: q.link,
-                                    youtubeLink: q.youtubeLink || ""
+                                    youtubeLink: q.youtubeLink || "",
                                   });
+
+                                  setTimeout(() => {
+                                    document
+                                      .getElementById("question-form")
+                                      ?.scrollIntoView({
+                                        behavior: "smooth",
+                                        block: "start",
+                                      });
+                                  }, 100);
                                 }}
                                 className="p-2 text-xs font-semibold bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 border border-blue-500/20 rounded-lg transition"
                                 title="Edit"
