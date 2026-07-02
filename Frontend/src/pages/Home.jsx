@@ -469,7 +469,7 @@ border-gray-800
                   </p>
 
                   <h3 className="text-4xl font-black mt-3 text-cyan-400">
-                    200+
+                    300+
                   </h3>
 
                 </div>
