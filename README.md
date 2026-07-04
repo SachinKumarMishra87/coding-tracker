@@ -54,7 +54,12 @@ The application also includes an Admin Panel to manage topics, patterns, videos,
 - Difficulty Filters
 - Video Tutorials
 - Responsive Design
-
+- Support System
+- Real-time Notification
+- Add-Revision
+- Public Profile
+- Email -Notification
+- Etc..
 ---
 
 ## 📊 Dashboard
@@ -305,6 +310,25 @@ MERN Stack Developer
 GitHub: https://github.com/SachinKumarMishra87
 
 ---
+
+# 🧬 In Future Update
+
+Real-time Notifications
+Topic Progress Graph
+AI Code Explain
+AI Dry Run
+AI Complexity Analyzer
+AI Weak Topic Detection
+Question Discussion Section
+Daily Goal System
+Achievement/Badge System
+XP / Level System
+Bottom Mobile Navbar
+Skeleton Loaders
+Error/Empty UI States
+Multi-language Support
+Settings Page Advanced
+Account Delete Option
 
 # ⭐ Support
 
