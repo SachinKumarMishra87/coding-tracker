@@ -108,8 +108,6 @@ export const getHint = async (
     const response = await axios.post(
       "https://openrouter.ai/api/v1/chat/completions",
       {
-        // Ab kisi specific model ka jhanjhat hi khatam!
-        // Yeh hamesha chalne waale kisi bhi free model ko automatic pick kar lega.
         model: "openrouter/free",
 
         messages: [
