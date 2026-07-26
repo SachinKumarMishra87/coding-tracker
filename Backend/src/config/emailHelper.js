@@ -1,17 +1,18 @@
-import resend from "../config/resend.js";
+import transporter from "../config/transporter.js";
 
 export const sendEmail = async ({ to, subject, html }) => {
   try {
-    const data = await resend.emails.send({
-      from: "LeetPatTracker <onboarding@resend.dev>",
-      to: [to],
+    const info = await transporter.sendMail({
+      from: `LeetPatTracker <${process.env.EMAIL_FROM}>`,
+      to,
       subject,
       html,
     });
 
-    return data;
+    console.log("Email sent:", info.messageId);
+    return info;
   } catch (error) {
-    console.log("Resend error:", error);
+    console.error("Email Error:", error);
     throw error;
   }
 };
